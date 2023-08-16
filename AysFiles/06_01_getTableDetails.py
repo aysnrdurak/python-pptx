@@ -12,6 +12,6 @@ for slide in presentation.slides:
             print("Tablo Bilgileri:")
             
             # Tablonun tüm satırlarını ve sütunlarını döngüyle kontrol et
-            for row in table.rows:
-                for cell in row.cells:
-                    print("Satir: {}, Sütun: {}, Metin: {}".format(cell.row, cell.column, cell.text))
+            for row_idx, row in enumerate(table.rows):
+                for col_idx, cell in enumerate(row.cells):
+                    print("Satır: {}, Sütun: {}, Metin: {}".format(row_idx, col_idx, cell.text))
