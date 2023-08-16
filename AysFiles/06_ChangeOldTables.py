@@ -5,8 +5,8 @@ presentation = Presentation('Cam_details_template_(Draft_V01).pptx')
 
 # Belirli bir hücrenin satır ve sütun indekslerini belirle
 target_row = 2
-target_column = 1
-target_cell_value = "Objective"
+target_column = 2
+target_cell_value = "Pump type"
 
 # Her slayttaki şekilleri kontrol et
 for slide in presentation.slides:
