@@ -3,8 +3,10 @@ from pptx import Presentation
 # PowerPoint dosyasını yükle
 presentation = Presentation('Cam_details_template_(Draft_V01).pptx')
 
-# Tablo sayacını başlangıçta sıfıra ayarla
-table_count = 0
+# Belirli bir hücrenin satır ve sütun indekslerini belirle
+target_row = 2
+target_column = 1
+target_cell_value = "Objective"
 
 # Her slayttaki şekilleri kontrol et
 for slide in presentation.slides:
@@ -12,16 +14,17 @@ for slide in presentation.slides:
         if shape.has_table:
             
             table = shape.table
-            # Sadece 1. tabloyu kontrol et
-            if table_count == 1:
-                if table and table.cell(0, 0).text:
-                    print("{} tablonun 1. hücresi değeri: {}".format(table_count, table.cell(0, 0).text))
-                    table.cell(0, 0).text = "Yeni Değer"  # 1. hücreye yeni değeri atar
-                    print("{} tablonun 1. hücresi değeri: {}".format(table_count, table.cell(0, 0).text))
-                table_count += 1
-                break  # 1. tabloyu bulduktan sonra diğer tablolara bakmamak için döngüyü kırar
-            else: 
-                table_count +=1
+            # Hedef hücrenin içeriğini kontrol et
+            if table.cell(0, 0).text == target_cell_value:
+                print("Dostum hücreyi buldum yayy!! Değeri şuymuş: ", table.cell(0, 0).text)
+                if target_row < len(table.rows) and target_column < len(table.columns):
+                    cell = table.cell(target_row, target_column)
+                    print("Önceki Değer: ", cell.text)
+                    
+                    # Hücrenin değerini güncelle
+                    new_value = "Yeni Değer"
+                    cell.text = new_value
+                    print("Yeni Değer: ", cell.text)
 
-# Sunuyu kaydet
-presentation.save("06_ChangeOldTables.pptx")
+# Değişiklikleri kaydet
+presentation.save('06_ChangeOldTables.pptx')
